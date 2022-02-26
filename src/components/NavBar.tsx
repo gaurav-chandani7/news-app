@@ -1,16 +1,17 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import { Link } from 'react-router-dom'
 import logo from '../news-app-logo.png';
 
 export default class NavBar
-    extends Component<any> {
+    extends Component<{ mode: string , toggleMode: any }> {
     render() {
+        let {mode} = this.props
         return (
             <div>
-                <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                <nav className={`navbar navbar-expand-lg ${mode === "light" ? 'navbar-light bg-light' : 'navbar-dark bg-dark'}`}>
                     <div className="container-fluid">
                         <Link className="navbar-brand" to="/">
-                            <img src={logo} height="70"/>
+                            <img src={logo} height="70" alt='logo'/>
                         </Link>
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
@@ -57,6 +58,10 @@ export default class NavBar
                                     <Link className="nav-link" to="/automobile">Automobile</Link>
                                 </li>
                             </ul>
+                        </div>
+                        <div className={`form-check form-switch text-${mode==='light'?'dark':'light'}`}>
+                            <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" onClick={this.props.toggleMode}/>
+                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Dark Mode</label>
                         </div>
                     </div>
                 </nav>
