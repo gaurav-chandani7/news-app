@@ -1,35 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react'
 import './App.css';
+import NavBar from './components/NavBar';
+import News from './components/News';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes
+} from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <button onClick={newsApi}>
-          Hit api
-        </button>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  render() {
+    return (
+      <Router>
+        <div>
+          <NavBar />
+          <Routes>
+            <Route path='/' element={<News key="all"/>}/>
+            <Route path='/national' element={<News category='national' key="national"/>}/>
+            <Route path='/business' element={<News category='business' key="business"/>}/>
+            <Route path='/sports' element={<News category='sports' key="sports"/>}/>
+            <Route path='/world' element={<News category='world' key="world"/>}/>
+            <Route path='/politics' element={<News category='politics' key="politics"/>}/>
+            <Route path='/technology' element={<News category='technology' key="technology"/>}/>
+            <Route path='/startup' element={<News category='startup' key="startup"/>}/>
+            <Route path='/entertainment' element={<News category='entertainment' key="entertainment"/>}/>
+            <Route path='/miscellaneous' element={<News category='miscellaneous' key="miscellaneous"/>}/>
+            <Route path='/hatke' element={<News category='hatke' key="hatke"/>}/>
+            <Route path='/science' element={<News category='science' key="science"/>}/>
+            <Route path='/automobile' element={<News category='automobile' key="automobile"/>}/>
+          </Routes>
+        </div>
+      </Router>
+    )
+  }
 }
-
-const newsApi = () => {
-  fetch("https://inshortsapi.vercel.app/news?category=national", {
-    method: "GET"
-  }).then(res => res.json()).then(data=>console.log(data));
-}
-
-export default App;
